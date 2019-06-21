@@ -8,11 +8,11 @@ const geocode = (address, callback) => {
     
     request({ url: geoUrl, json: true }, (error, { body }) => {
         if (error) {
-            callback('Unable to connect to Mapbox!', null);
+            callback('Unable to connect to Mapbox!', undefined);
         } else if (body.features.length === 0) {
-            callback(`Bad request: ${body.message}`, null);
+            callback(`No location found. Try another search.`, undefined);
         } else {
-            callback(null, {
+            callback(undefined, {
                 latitude: body.features[0].center[1],
                 longitude: body.features[0].center[0],
                 location: body.features[0].place_name
